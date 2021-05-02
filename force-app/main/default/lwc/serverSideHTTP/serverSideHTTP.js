@@ -19,6 +19,7 @@ export default class ServerSideHTTP extends LightningElement {
     fromQuery;
     toQuery;
     displayData;
+    display = false;
 
 
    fromCurrencyChangeHandler(event) {
@@ -32,6 +33,8 @@ export default class ServerSideHTTP extends LightningElement {
     }
 
     currencyConversionHandler() {
+
+        this.display = false;
 
         // USING SERVER-SIDE HTTP API call
 
@@ -66,6 +69,7 @@ export default class ServerSideHTTP extends LightningElement {
             console.log(tempData);
             this.displayData = tempData;
             console.log(this.displayData);
+            this.display = true;
         })
         .catch(error => console.error(error))
 

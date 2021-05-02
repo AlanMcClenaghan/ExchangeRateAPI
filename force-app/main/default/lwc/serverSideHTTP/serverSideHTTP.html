@@ -1,6 +1,6 @@
 <template>
     <lightning-card title="Server-side HTTP">
-        <div class="slds-m-around_medium">
+        <div class="slds-m-around_small">
             <lightning-layout multiple-rows="true" vertical-align="end">
                 <lightning-layout-item padding="around-small">
                     <div class="slds-form-element">
@@ -30,7 +30,7 @@
                 </lightning-layout-item>
             </lightning-layout>
         </div>
-        <div class="slds-m-around_medium">
+        <div class="slds-m-around_small">
             <lightning-layout multiple-rows="true" vertical-align="end">
                 <lightning-layout-item padding="around-small">
                     <div class="slds-form-element">
@@ -60,7 +60,7 @@
                 </lightning-layout-item>
             </lightning-layout>
         </div>
-        <div class="slds-m-around_medium">
+        <div class="slds-m-around_small">
             <lightning-layout multiple-rows="true" vertical-align="end">
                 <lightning-layout-item padding="around-small">
                     <lightning-button
@@ -72,5 +72,18 @@
                 </lightning-layout-item>
             </lightning-layout>
         </div>
+        <div class="slds-m-around_small">
+            <template if:true={display}>
+                <div class="slds-m-around_small">
+                    <div>From Currency Code: <strong>{displayData.From_Currency_Code}</strong></div>
+                    <div>From Currency Name: <strong>{displayData.From_Currency_Name}</strong></div>
+                    <div>To Currency Code: <strong>{displayData.To_Currency_Code}</strong></div>
+                    <div>To Currency Name: <strong>{displayData.To_Currency_Name}</strong></div>
+                    <div>Last Refreshed: <strong>{displayData.Last_Refreshed}</strong></div>
+                    <div>Exchange Rate: <strong>{displayData.Exchange_rate}</strong></div>
+                </div>
+            </template>
+        </div>
     </lightning-card>
 </template>
+
