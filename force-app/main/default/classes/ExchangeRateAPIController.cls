@@ -1,5 +1,36 @@
 public with sharing class ExchangeRateAPIController {
-    public ExchangeRateAPIController() {
+    @AuraEnabled
+    public static map<String, Object> retrieveExchangeRates(String endPointURL) {
+        
+        map<String, Object> mapJSONData = new map<String, Object>();
+        
+        String strResponse = null;
 
+        if (String.isNotBlank(endPointURL)) {
+             // Instantiate a new http object
+            Http http = new Http();
+
+            // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
+            HttpRequest request = new HttpRequest();
+            request.setEndpoint(endPointURL);
+            request.setMethod('GET');
+
+            try {
+                 // Send the request, and return a response
+                HttpResponse response = http.send(request);
+                if (response.getStatusCode() == 200) {
+                    strResponse = response.getBody();
+                } else {
+                    throw new CalloutException(response.getBody());
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        if (String.isNotBlank(strResponse)) {
+            mapJSONData = (map<String, Object>) JSON.deserializeUntyped(strResponse);
+            System.debug('mapJSONData: ' + mapJSONData);
+        }
+        return mapJSONData;
     }
 }
