@@ -34,3 +34,10 @@ public with sharing class ExchangeRateAPIController {
         return mapJSONData;
     }
 }
+
+
+/*
+Execute Anonymous code
+ExchangeRateAPIController.retrieveExchangeRates(
+'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=USD&apikey=C2LE11OK1EV4V4NH');
+*/
