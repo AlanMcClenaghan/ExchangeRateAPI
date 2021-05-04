@@ -1,3 +1,105 @@
 <template>
-    
+    <lightning-card title="Client-side Fetch API">
+        <div class="slds-m-around_small">
+            <lightning-layout multiple-rows="true" vertical-align="end">
+                <lightning-layout-item padding="around-small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-combobox 
+                                title="Select Currency" 
+                                label="Select Major Base Currency" 
+                                value={fromCurrencyValue}
+                                placeholder="--Select--"
+                                options={options}
+                                onchange={fromCurrencyChangeHandler}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-input
+                                id="from"
+                                type="search"
+                                label="Or Enter a Valid 3-Digit Currency Code"
+                                value={fromQuery}
+                                onchange={fromCurrencyChangeHandler}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="slds-m-around_small">
+            <lightning-layout multiple-rows="true" vertical-align="end">
+                <lightning-layout-item padding="around-small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-combobox 
+                                title="Select Currency" 
+                                label="Select Major To Currency" 
+                                value={toCurrencyValue}
+                                placeholder="--Select--"
+                                options={options}
+                                onchange={toCurrencyChangeHandler}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-input
+                                id="to"
+                                type="search"
+                                label="Or Enter a Valid 3-Digit Currency Code"
+                                value={toQuery}    
+                                onchange={toCurrencyChangeHandler}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="slds-m-around_small">
+            <lightning-layout multiple-rows="true" vertical-align="end">
+                <lightning-layout-item padding="around-small">
+                    <lightning-button
+                        title="Currency Conversion"
+                        label="Get Conversion Rate"
+                        variant="brand"
+                        onclick={currencyConversionHandler}>
+                    </lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button
+                        title="Reset Button"
+                        label="Reset"
+                        variant="brand"
+                        onclick={resetHandler}>
+                    </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="slds-m-around_small">
+            <template if:true={display}>
+                <div class="slds-m-around_small">
+                    <h1 style="font-size: 16px;">Showing search results for <strong>{displayData.From_Currency_Code}</strong> to <strong>{displayData.To_Currency_Code}</strong></h1>
+                    <div>From Currency Name: <strong>{displayData.From_Currency_Name}</strong></div>
+                    <div>To Currency Name: <strong>{displayData.To_Currency_Name}</strong></div>
+                    <div>Last Refreshed: <strong>{displayData.Last_Refreshed}</strong></div>
+                    <div>Exchange Rate: <strong>{displayData.Exchange_rate}</strong></div>
+                </div>
+            </template>
+            <template if:true={error}>
+                <div class="slds-m-around_small">
+                    <div><strong>No exchange rate data received!</strong></div>
+                    <div>Did you enter an incorrected Currency Code?</div>
+                    <div><em>Please check and try again.</em></div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
 </template>
+
