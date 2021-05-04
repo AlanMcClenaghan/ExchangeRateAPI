@@ -79,22 +79,16 @@ export default class ServerSideHTTP extends LightningElement {
                 Exchange_rate : ''
             }
 
-            
-            console.log(exchangeData);
-            console.log(tempData);
             tempData.From_Currency_Code = exchangeData['1. From_Currency Code'];
             tempData.From_Currency_Name = exchangeData['2. From_Currency Name'];
             tempData.To_Currency_Code = exchangeData['3. To_Currency Code'];
             tempData.To_Currency_Name = exchangeData['4. To_Currency Name'];
             tempData.Exchange_rate  = exchangeData['5. Exchange Rate'];
             tempData.Last_Refreshed = exchangeData['6. Last Refreshed'];
-            console.log(tempData);
             this.displayData = tempData;
-            console.log(this.displayData);
             this.display = true;
         })
         .catch(error => {
-            console.log("Not a valid Currency Code");
             this.error = true;
             console.error(error);
         })
