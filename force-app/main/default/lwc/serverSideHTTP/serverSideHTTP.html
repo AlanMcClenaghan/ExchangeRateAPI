@@ -19,9 +19,10 @@
                 <lightning-layout-item padding="around-small">
                     <div class="slds-form-element">
                         <div class="slds-form-element__control">
-                            <lightning-input 
+                            <lightning-input
+                                id="from"
                                 type="search"
-                                label="Or Search Using Valid Currency Code"
+                                label="Or Enter a Valid 3-Digit Currency Code"
                                 value={fromQuery}
                                 onchange={fromCurrencyChangeHandler}>
                             </lightning-input>
@@ -49,9 +50,10 @@
                 <lightning-layout-item padding="around-small">
                     <div class="slds-form-element">
                         <div class="slds-form-element__control">
-                            <lightning-input 
+                            <lightning-input
+                                id="to"
                                 type="search"
-                                label="Or Search Using Valid Currency Code"
+                                label="Or Enter a Valid 3-Digit Currency Code"
                                 value={toQuery}    
                                 onchange={toCurrencyChangeHandler}>
                             </lightning-input>
@@ -70,17 +72,31 @@
                         onclick={currencyConversionHandler}>
                     </lightning-button>
                 </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button
+                        title="Reset Button"
+                        label="Reset"
+                        variant="brand"
+                        onclick={resetHandler}>
+                    </lightning-button>
+                </lightning-layout-item>
             </lightning-layout>
         </div>
         <div class="slds-m-around_small">
             <template if:true={display}>
                 <div class="slds-m-around_small">
-                    <div>From Currency Code: <strong>{displayData.From_Currency_Code}</strong></div>
+                    <h1 style="font-size: 16px;">Showing search results for <strong>{displayData.From_Currency_Code}</strong> to <strong>{displayData.To_Currency_Code}</strong></h1>
                     <div>From Currency Name: <strong>{displayData.From_Currency_Name}</strong></div>
-                    <div>To Currency Code: <strong>{displayData.To_Currency_Code}</strong></div>
                     <div>To Currency Name: <strong>{displayData.To_Currency_Name}</strong></div>
                     <div>Last Refreshed: <strong>{displayData.Last_Refreshed}</strong></div>
                     <div>Exchange Rate: <strong>{displayData.Exchange_rate}</strong></div>
+                </div>
+            </template>
+            <template if:true={error}>
+                <div class="slds-m-around_small">
+                    <div><strong>No exchange rate data received!</strong></div>
+                    <div>Did you enter an incorrected Currency Code?</div>
+                    <div><em>Please check and try again.</em></div>
                 </div>
             </template>
         </div>

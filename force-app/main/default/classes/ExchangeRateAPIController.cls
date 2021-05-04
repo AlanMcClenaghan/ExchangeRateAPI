@@ -37,7 +37,18 @@ public with sharing class ExchangeRateAPIController {
 
 
 /*
-Execute Anonymous code
+Account 1
 ExchangeRateAPIController.retrieveExchangeRates(
 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=USD&apikey=C2LE11OK1EV4V4NH');
+*/
+
+/*
+Account 2
+ExchangeRateAPIController.retrieveExchangeRates(
+'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=USD&apikey=BTPCEJAG4SXCEC95');
+*/
+
+/*
+Welcome to Alpha Vantage! Your API key is: BTPCEJAG4SXCEC95. 
+Please record this API key at a safe place for future data access.
 */

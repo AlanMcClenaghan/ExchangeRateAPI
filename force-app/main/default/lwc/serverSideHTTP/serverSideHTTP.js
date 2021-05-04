@@ -20,21 +20,41 @@ export default class ServerSideHTTP extends LightningElement {
     toQuery;
     displayData;
     display = false;
+    error = false;
 
 
-   fromCurrencyChangeHandler(event) {
+    fromCurrencyChangeHandler(event) {
         this.fromCurrencyValue = event.target.value;
-        console.log('fromCurrencyValue: ' + this.fromCurrencyValue); 
     }
 
     toCurrencyChangeHandler(event) {
         this.toCurrencyValue = event.target.value;
-        console.log('toCurrencyValue: ' + this.toCurrencyValue); 
+    }
+
+    hideResults() {
+        this.display = false;
+        this.error = false;
+    }
+
+    clearQueries() {
+        this.template.querySelectorAll('lightning-input').forEach(element => {
+            element.value = null;
+        });
+        this.displayData = {};
+        this.fromCurrencyValue = 'GBP';
+        this.toCurrencyValue = '';
+        this.fromQuery = '';
+        this.toQuery = '';
+    }
+
+    resetHandler(event) {
+        this.hideResults();
+        this.clearQueries();
     }
 
     currencyConversionHandler() {
 
-        this.display = false;
+        this.hideResults();
 
         // USING SERVER-SIDE HTTP API call
 
@@ -42,11 +62,13 @@ export default class ServerSideHTTP extends LightningElement {
                         + this.fromCurrencyValue 
                         + '&to_currency=' 
                         + this.toCurrencyValue 
-                        + '&apikey=C2LE11OK1EV4V4NH';
+                        + '&apikey=BTPCEJAG4SXCEC95';
 
         retrieveExchangeRates({endPointURL : endpoint})
         .then(data => {
             console.log(data);
+
+            let exchangeData = data['Realtime Currency Exchange Rate'];
 
             let tempData = {
                 From_Currency_Code : '',
@@ -57,7 +79,7 @@ export default class ServerSideHTTP extends LightningElement {
                 Exchange_rate : ''
             }
 
-            let exchangeData = data['Realtime Currency Exchange Rate'];
+            
             console.log(exchangeData);
             console.log(tempData);
             tempData.From_Currency_Code = exchangeData['1. From_Currency Code'];
@@ -71,15 +93,16 @@ export default class ServerSideHTTP extends LightningElement {
             console.log(this.displayData);
             this.display = true;
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+            console.log("Not a valid Currency Code");
+            this.error = true;
+            console.error(error);
+        })
 
-        this.fromQuery = '';
-        this.toQuery = '';
-        console.log('fromCurrencyValue: ' + 
-                    this.fromCurrencyValue + 
-                    ' ' +
-                    'toCurrencyValue: ' + 
-                    this.toCurrencyValue );
+        this.clearQueries();
+   
     }
 
 }
+
+
